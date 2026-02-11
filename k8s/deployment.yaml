@@ -1,0 +1,19 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+ name: userapp
+spec:
+ replicas: 2
+ selector:
+  matchLabels:
+   app: userapp
+ template:
+  metadata:
+   labels:
+    app: userapp
+  spec:
+   containers:
+   - name: userapp
+     image: gcr.io/YOUR_PROJECT/userapp:latest
+     ports:
+     - containerPort: 3000

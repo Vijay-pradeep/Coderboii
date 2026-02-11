@@ -1,0 +1,23 @@
+<input id="name"/>
+<button onclick="search()">Search</button>
+<div id="out"></div>
+
+<script>
+async function search(){
+ let name=document.getElementById("name").value
+ let r=await fetch(`/search?name=${name}`)
+ let d=await r.json()
+ if(d.msg=="User not found"){
+   document.getElementById("out").innerHTML=
+   `Not found <button onclick="add()">Add</button>`
+ } else document.getElementById("out").innerText=d.msg
+}
+
+async function add(){
+ let name=document.getElementById("name").value
+ await fetch("/add",{method:"POST",
+ headers:{"Content-Type":"application/json"},
+ body:JSON.stringify({name})})
+ alert("Added")
+}
+</script>
