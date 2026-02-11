@@ -9,7 +9,7 @@ jobs:
       - checkout
       - setup_remote_docker   # 👈 THIS LINE FIXES IT
       - run: npm install
-      - run: docker build -t userapp .
+      - run: docker build -t userapp -f app/Dockerfile .
 
 workflows:
   build_and_deploy:
