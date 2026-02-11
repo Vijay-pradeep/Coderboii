@@ -1,13 +1,17 @@
 version: 2.1
+
 jobs:
- build:
-  docker:
-   - image: cimg/node:18.0
-  steps:
-   - checkout
-   - run: npm install
-   - run: docker build -t userapp .
+  build:
+    docker:
+      - image: cimg/node:18.0
+
+    steps:
+      - checkout
+      - setup_remote_docker   # 👈 THIS LINE FIXES IT
+      - run: npm install
+      - run: docker build -t userapp .
+
 workflows:
- build_and_deploy:
-  jobs:
-   - build
+  build_and_deploy:
+    jobs:
+      - build
